@@ -11,22 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('transacaos', function (Blueprint $table) {
+        Schema::create('carteiras', function (Blueprint $table) {
             $table->id();
-            $table->string('tipoTransacao');
-            $table->double('precoUnidade', 10, 2);
+            $table->string('nomeCarteira');
 
-            
-            // Cria o relacionamento entre as tabelas usuários e ativos
+            // Cria o relacionamento entre as tabela users
             $table->unsignedBigInteger('id_user');
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
 
-            // Cria o relacionamento entre as tabelas ativos e transações
-            $table->unsignedBigInteger('id_ativo');
-            $table->foreign('id_ativo')->references('id')->on('ativos')->onDelete('cascade')->onUpdate('cascade');
-
-
             $table->timestamps();
+
         });
     }
 
@@ -35,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('transacaos');
+        Schema::dropIfExists('carteiras');
     }
 };

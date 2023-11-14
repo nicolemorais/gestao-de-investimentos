@@ -24,32 +24,49 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="grid gap-x-40 max-sm:gap-y-10 max-lg:gap-y-10 items-start justify-center grid-cols-1 shadow-xl lg:grid-cols-2 rounded-xl  bg-gray-50 p-6 text-gray-900">
-                    <div class="flex justify-between flex-col py-4 px-4 w-full rounded-md">
-                            <div class="mb-4 mt-4 flex justify-between gap-8">
-                                <h2 class="font-semibold text-xl text-gray-800 leading-tight">Carteiras</h2>
-                                <div class="block">
-                                    {{--    Quantidade de carteiras --}}
-                                     <div class=" gap-2 font-semibold text-md text-gray-800 leading-tight inline-flex items-center px-4 py-2 border bg-white-950 border-slate-700 rounded-full h-7  uppercase tracking-widest shadow-sm  disabled:opacity-25 transition ease-in-out duration-150">
-                                        {{ ($ativos->count()) }}
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-                                            <path d="M2.273 5.625A4.483 4.483 0 015.25 4.5h13.5c1.141 0 2.183.425 2.977 1.125A3 3 0 0018.75 3H5.25a3 3 0 00-2.977 2.625zM2.273 8.625A4.483 4.483 0 015.25 7.5h13.5c1.141 0 2.183.425 2.977 1.125A3 3 0 0018.75 6H5.25a3 3 0 00-2.977 2.625zM5.25 9a3 3 0 00-3 3v6a3 3 0 003 3h13.5a3 3 0 003-3v-6a3 3 0 00-3-3H15a.75.75 0 00-.75.75 2.25 2.25 0 01-4.5 0A.75.75 0 009 9H5.25z" />
-                                        </svg>      
-                                     </div>                                  
-                                </div>
+                    <div class="flex justify-between flex-col py-4 px-4 w-full rounded-md bg-slate-200">
+                            <div class="mb-2 mt-4 flex justify-between items-center">
+                                 {{-- Quantidade de carteiras / Botão --}}
+                                 <div class="flex justify-right gap-2">
+                                    <h2 class="font-semibold text-xl text-gray-800 leading-tight">Carteiras</h2>
+
+                                    <span class="font-semibold text-md text-gray-800 leading-tight inline-flex items-center gap-x-1 px-2 border bg-white-950 border-slate-500 rounded-full  shadow-sm  disabled:opacity-25 transition ease-in-out duration-150">
+                                        {{ ($carteiras->count()) }}
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4">
+                                            <path d="M1 4.25a3.733 3.733 0 012.25-.75h13.5c.844 0 1.623.279 2.25.75A2.25 2.25 0 0016.75 2H3.25A2.25 2.25 0 001 4.25zM1 7.25a3.733 3.733 0 012.25-.75h13.5c.844 0 1.623.279 2.25.75A2.25 2.25 0 0016.75 5H3.25A2.25 2.25 0 001 7.25zM7 8a1 1 0 011 1 2 2 0 104 0 1 1 0 011-1h3.75A2.25 2.25 0 0119 10.25v5.5A2.25 2.25 0 0116.75 18H3.25A2.25 2.25 0 011 15.75v-5.5A2.25 2.25 0 013.25 8H7z" />
+                                        </svg>     
+                                    </span>
+                                 </div>
+                                
+                                <x-link-button x-data="" x-on:click.prevent="$dispatch('open-modal', 'carteiras')" class="gap-1">
+                                    {{ __('Adicionar') }}
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                                        <path d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
+                                    </svg>   
+                                </x-link-button>                         
+                            
+                                
+                                <x-modal name="carteiras" focusable>
+
+                                        @include('carteiras')
+                                    
+                                </x-modal>
                             </div>
-                            @include('components.carteiras')
+                    
+                            @include('components.carteiras-list')
+                            
                     </div>
 
                     <div class="flex justify-center flex-col py-4 px-4 w-full">
                         
-                        @if (count($ativos) > 0)
+                       {{-- @if (count($ativos) > 0)
                             <div class="mb-4 mt-4 items-end">
                                 <h2 class=" font-semibold text-xl text-gray-800 leading-tight">Total de ativos</h2>
                             </div>
-                        @endif
+                        @endif--}}
 
-                        {{-- Gráfico --}}
-                        @include('components.chart')
+                        {{-- Gráfico 
+                        @include('components.chart')--}}
                             
                     </div>
                 </div>

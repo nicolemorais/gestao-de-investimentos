@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{Ativo, Transacao, User};
+use App\Models\{Carteira, Ativo, User};
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use App\Http\Controllers\Controller;
@@ -18,15 +18,15 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        //carteira
+        //listagem de carteiras
 
-        $ativos = Ativo::where('id_user', auth()->id())
+        $carteiras = Carteira::where('id_user', auth()->id())
             ->orderByDesc('id')
-            ->simplePaginate(3);   
+            ->simplePaginate(3); 
 
-        //Grafico - Ativos
+        //Gráfico que informa sobre os ativos
         
-        $catData = Ativo::where('id_user', auth()->id())->get();
+       /* $catData = Carteira::where('id_user', auth()->id())->get();
 
         if ($catData->count() > 0) {
             foreach ($catData as $cat) {
@@ -40,8 +40,9 @@ class DashboardController extends Controller
 
         //Formatação para chartjs
         $catLabel =  implode(',', $catNome);
-        $catTotal = implode(',', $catTotal);
+        $catTotal = implode(',', $catTotal);*/
 
-        return view('dashboard', compact('ativos','catLabel','catTotal'));
+
+        return view('dashboard', compact('carteiras'));
     }
 }

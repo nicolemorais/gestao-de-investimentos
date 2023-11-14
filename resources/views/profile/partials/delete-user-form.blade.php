@@ -1,7 +1,7 @@
 <section class="space-y-6">
     <header>
         <h2 class="text-lg font-medium text-gray-900">
-            {{ __('Delete Account') }}
+            {{ __('Deletar conta') }}
         </h2>
 
         <p class="mt-1 text-sm text-gray-600">
@@ -42,9 +42,9 @@
             </div>
 
             <div class="mt-6 flex justify-center">
-                <a x-on:click="$dispatch('close')" class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150">
+                <button x-on:click="$dispatch('close')" type="button" class="inline-flex items-center px-4 py-2 border border-opacity-40 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 hover:text-gray-800 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150">
                     {{ __('Cancel') }}
-                </a>
+                </button>
 
                 <x-danger-button class="ml-3">
                     {{ __('Delete Account') }}

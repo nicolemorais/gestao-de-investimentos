@@ -48,8 +48,8 @@ class User extends Authenticatable
         return $this->hasMany(Ativo::class);
     }
 
-    public function transacaos ()
+    public function carteiras ()
     {
-        return $this->hasMany(Transacao::class);
+        return $this->hasMany(Carteira::class);
     }
 }

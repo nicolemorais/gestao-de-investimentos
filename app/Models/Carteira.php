@@ -5,22 +5,28 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Transacao extends Model
+class Carteira extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'tipoTransacao',
-        'precoUnidade',
+        'nomeCarteira'    
     ];
 
-    /**
-     * Get the user that owns the Transacao
+      /**
+     * Get the user that owns the Ativo
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user(): BelongsTo
+    
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
+
+    public function ativos()
+    {
+        return $this->hasMany(Ativo::class);
+    }
+
 }

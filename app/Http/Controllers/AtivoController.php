@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{Ativo, User};
+use App\Models\{Ativo, Carteira, User};
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use App\Http\Controllers\Controller;
@@ -35,7 +35,7 @@ class AtivoController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         /// Cria um novo ativo
         $ativo = new Ativo();
         $ativo->fill([
@@ -85,7 +85,7 @@ class AtivoController extends Controller
         $ativo = Ativo::findOrFail($id);
 
         $ativo->delete();
- 
+
         return redirect()->route('dashboard')->with('success', 'Ativo apagado com sucesso!');
     }
 }

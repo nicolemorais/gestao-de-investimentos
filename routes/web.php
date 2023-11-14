@@ -2,9 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AtivoController;
-use App\Http\Controllers\TransacaoController;
+use App\Http\Controllers\CarteiraController;
 use App\Http\Controllers\DashboardController;
-
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,29 +29,28 @@ Route::middleware('auth')->group(function () {
     //Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
+    //Dashboard
+    Route::get('/teste', function () {
+        return view('teste');
+    });
+
+    //Carteiras
+    Route::get('/carteiras', [CarteiraController::class,'create'])->name('carteiras');
+    Route::post('/carteiras', [CarteiraController::class, 'store'])->name('carteiras');
+    Route::controller(CarteiraController::class)->prefix('carteiras')->group(function() {
+        Route::delete('destroy/{id}','destroy')->name('carteira.destroy');
+    });
+
     //Ativos
+    Route::get('/ativos', [AtivoController::class,'create'])->name('ativos');
+    Route::post('/ativos', [AtivoController::class, 'store'])->name('ativos');
     Route::controller(AtivoController::class)->prefix('ativos')->group(function() {
-        Route::get('create','create')->name('ativo');
-        Route::post('store','store')->name('ativo');
         Route::get('edit/{id}','edit')->name('ativo.edit');
         Route::put('edit/{id}','update')->name('ativo.update');
         Route::delete('destroy/{id}','destroy')->name('ativo.destroy');
-
     });
 
 
-
-   
-
-    //Rotas de ativos
-    Route::get('/ativos', [AtivoController::class,'create'])->name('ativos');
-    Route::post('/ativos', [AtivoController::class, 'store'])->name('ativos');
-    
-    
-   
-
-    //Rotas de transações
-    Route::get('/transacaos', [TransacaoController::class, 'create'])->name('transacaos');
 
 
 });

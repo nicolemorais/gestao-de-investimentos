@@ -1,14 +1,14 @@
 <header>
     <h2 class="text-lg font-medium text-gray-900">
-        {{ __('Excluir ativo') }}
+        {{ __('Excluir carteira') }}
     </h2>
 
     <p class="mt-1 text-sm text-gray-600">
-        {{ __('Tem certeza que deseja excluir o ativo da carteira?') }}
+        {{ __('Tem certeza que deseja excluir essa carteira?') }}
     </p>
 </header>
 
-<form action="{{ route('ativo.destroy', $ativo->id) }}" method="POST">
+<form action="{{ route('carteira.destroy', $carteira->id) }}" method="POST">
     @csrf
     @method('DELETE')
     

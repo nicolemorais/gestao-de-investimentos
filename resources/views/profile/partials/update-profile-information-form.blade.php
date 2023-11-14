@@ -1,7 +1,7 @@
 <section>
     <header>
         <h2 class="text-lg font-medium text-gray-900">
-            {{ __('Profile Information') }}
+            {{ __('Informações do perfil') }}
         </h2>
 
         <p class="mt-1 text-sm text-gray-600">
@@ -48,10 +48,11 @@
         </div>
 
         <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
+            <x-secondary-button>{{ __('Save') }}</x-secondary-button>
 
             @if (session('status') === 'profile-updated')
                 <p
+                    gap-3
                     x-data="{ show: true }"
                     x-show="show"
                     x-transition

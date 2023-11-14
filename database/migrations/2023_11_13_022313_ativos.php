@@ -19,9 +19,9 @@ return new class extends Migration
             $table->decimal('valorAtivo', 10, 2);
 
             
-            // Cria o relacionamento entre as tabelas usuários e ativos
-            $table->unsignedBigInteger('id_user');
-            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            // Cria o relacionamento com a tabela carteiras
+            $table->unsignedBigInteger('id_carteira');
+            $table->foreign('id_carteira')->references('id')->on('carteiras')->onDelete('cascade')->onUpdate('cascade');
 
 
             $table->timestamps();
