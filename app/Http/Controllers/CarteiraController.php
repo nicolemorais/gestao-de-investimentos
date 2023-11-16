@@ -38,14 +38,18 @@ class CarteiraController extends Controller
         $carteira->id_user = Auth::id();
         $carteira->save();
 
-       return redirect('dashboard')->with('success', 'Carteira criado com sucesso!');
+       return redirect('dashboard')->with('success', 'Carteira criada com sucesso!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id): void
+    public function destroy($id)
     {
-        //
+        $carteira = Carteira::findOrFail($id);
+
+        $carteira->delete();
+
+        return redirect()->route('dashboard')->with('success', 'Carteira removida com sucesso!');
     }
 }

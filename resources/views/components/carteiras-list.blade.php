@@ -1,60 +1,50 @@
-@if ($carteiras->count() === 3)
-    
+@if ($carteiras->count() === 0)
+
     <div class="py-3">
         <span class="text-gray-700">Crie sua primeira carteira e comece a gerenciar seus ativos.</span>
     </div>
 @else
-
     @foreach ($carteiras as $carteira)
-<section>
-    <div class="bg-white shadow-md rounded-md mb-4 p-4">
+        <section>
+            <div class="bg-white shadow-md rounded-md mb-4 p-4">
 
-            {{-- Nome --}}
-            <div class="flex justify-between items-center">
+                {{-- Nome --}}
+                <div class="flex justify-between items-center">
 
-                <span class="font-bold">{{ $carteira->nomeCarteira }}</span>
-            
-                    {{--<x-link-button class="sm:px-4"
-                        x-data=""
+                    <span class="font-bold">{{ $carteira->nomeCarteira }} </span>
+
+                    <x-link-button class="sm:px-4 translate-x-1 border-neutral-100 hover:bg-neutral-200 active:bg-stone-200 bg-white" x-data=""
                         x-on:click.prevent="$dispatch('open-modal', '{{ $carteira->id }}')">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
-                            <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32l8.4-8.4z" />
-                            <path d="M5.25 5.25a3 3 0 00-3 3v10.5a3 3 0 003 3h10.5a3 3 0 003-3V13.5a.75.75 0 00-1.5 0v5.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5V8.25a1.5 1.5 0 011.5-1.5h5.25a.75.75 0 000-1.5H5.25z" />
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 fill-red-800">
+                            <path fill-rule="evenodd"
+                                d="M8.75 1A2.75 2.75 0 006 3.75v.443c-.795.077-1.584.176-2.365.298a.75.75 0 10.23 1.482l.149-.022.841 10.518A2.75 2.75 0 007.596 19h4.807a2.75 2.75 0 002.742-2.53l.841-10.52.149.023a.75.75 0 00.23-1.482A41.03 41.03 0 0014 4.193V3.75A2.75 2.75 0 0011.25 1h-2.5zM10 4c.84 0 1.673.025 2.5.075V3.75c0-.69-.56-1.25-1.25-1.25h-2.5c-.69 0-1.25.56-1.25 1.25v.325C8.327 4.025 9.16 4 10 4zM8.58 7.72a.75.75 0 00-1.5.06l.3 7.5a.75.75 0 101.5-.06l-.3-7.5zm4.34.06a.75.75 0 10-1.5-.06l-.3 7.5a.75.75 0 101.5.06l.3-7.5z"
+                                clip-rule="evenodd" />
                         </svg>
                     </x-link-button>
 
                     <x-modal name="{{ $carteira->id }}" focusable>
-                        <div class="flex p-4 justify-end">
-                            <button x-on:click="$dispatch('close')" class=" gap-2 font-semibold text-md text-gray-800 leading-tight inline-flex items-center px-4 py-2  bg-white-950  h-7 ">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-                                <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd" />
-                                </svg>                                              
-                            </button>                                  
-                        </div>
-                
-                        @include('carteiras')
-                    </x-modal>--}}
-            </div>
-        
-            {{-- Descrição 
-            <div class="py-3">
-                <p class="text-base-content text-opacity-60 text-md">
-                    {{$ativo->descricaoAtivo}}
-                </p>
-            </div>--}}
-        
-            <!-- {{-- Complemento: código, valor --}}
+                        @include('carteira.partials.delete-carteira')
+                    </x-modal>
+                </div>
+
+                <div class="py-3">
+                    <div class="text-base-content text-opacity-60 text-md">
+
+                    </div>
+                </div>
+
+                <!--{{-- Complemento: código, valor --}}
             <div class="flex justify-between text-sm text-base-content text-opacity-60 truncate">
 
                 {{-- Código --}}
                 <div class="flex flex-grow">
                     <span class="mr-3 flex items-center font-bold">
-                        <span>{{--$ativo->codigo--}}</span>
+                        <span>{{-- $ativo->codigo --}}</span>
                     </span>
                 </div>
 
                 {{-- Valor --}}
-                <div>                
+                <div>
                     <span class="flex items-center gap-1">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
                             <path d="M10.464 8.746c.227-.18.497-.311.786-.394v2.795a2.252 2.252 0 01-.786-.393c-.394-.313-.546-.681-.546-1.004 0-.323.152-.691.546-1.004zM12.75 15.662v-2.824c.347.085.664.228.921.421.427.32.579.686.579.991 0 .305-.152.671-.579.991a2.534 2.534 0 01-.921.42z" />
@@ -65,12 +55,11 @@
                 </div>
             </div>-->
 
-    </div>
+            </div>
     @endforeach
 
-    {{--Páginação de ativos--}}
+    {{-- Páginação de carteiras --}}
     {{ $carteiras->links() }}
 
 @endif
 </section>
-

@@ -22,16 +22,16 @@ class DashboardController extends Controller
 
         $carteiras = Carteira::where('id_user', auth()->id())
             ->orderByDesc('id')
-            ->simplePaginate(3); 
+            ->simplePaginate(3);
 
-        //Gráfico que informa sobre os ativos
-        
-       /* $catData = Carteira::where('id_user', auth()->id())->get();
+        //Gráfico que informa sobre os ativos nas carteiras
+
+        $catData = Carteira::all();
 
         if ($catData->count() > 0) {
             foreach ($catData as $cat) {
-                $catNome[] = "'".$cat->codigo."'";
-                $catTotal[] = Ativo::where('id', $cat->id)->where('id_user', auth()->id())->sum('valorAtivo');
+                $catNome[] = "'".$cat->nomeCarteira."'";
+                $catTotal[] = Carteira::where('id', $cat->id)->count();
             }
         } else {
             $catNome = ['0'];
@@ -40,9 +40,9 @@ class DashboardController extends Controller
 
         //Formatação para chartjs
         $catLabel =  implode(',', $catNome);
-        $catTotal = implode(',', $catTotal);*/
+        $catTotal = implode(',', $catTotal);
 
 
-        return view('dashboard', compact('carteiras'));
+        return view('dashboard', compact('carteiras','catLabel','catTotal'));
     }
 }

@@ -1,5 +1,4 @@
 @if ($carteiras->count() === 0)
-    
     <div class="p-3">
         <span class="text-gray-700">Crie sua primeira carteira e comece a gerenciar seus ativos.</span>
     </div>
@@ -13,7 +12,7 @@
             <div class="flex justify-between items-center">
 
                 <span class="font-bold">{{ $carteira->nomeCarteira }}</span>
-            
+
                     <x-link-button class="sm:px-4"
                         x-data=""
                         x-on:click.prevent="$dispatch('open-modal', '{{ $carteira->id }}')">
@@ -28,21 +27,22 @@
                             <button x-on:click="$dispatch('close')" class=" gap-2 font-semibold text-md text-gray-800 leading-tight inline-flex items-center px-4 py-2  bg-white-950  h-7 ">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
                                 <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd" />
-                                </svg>                                              
-                            </button>                                  
+                                </svg>
+                            </button>
                         </div>
-                
+
                         @include('carteiras')
-                    </x-modal>--}}
+
+                    </x-modal>
             </div>
-        
+
             {{-- Descrição --}}
             <div class="py-3">
                 <p class="text-base-content text-opacity-60 text-md">
                     {{$ativo->descricaoAtivo}}
                 </p>
             </div>
-        
+
             {{-- Complemento: código, valor --}}
             <div class="flex justify-between text-sm text-base-content text-opacity-60 truncate">
 
@@ -54,7 +54,7 @@
                 </div>
 
                 {{-- Valor --}}
-                <div>                
+                <div>
                     <span class="flex items-center gap-1">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
                             <path d="M10.464 8.746c.227-.18.497-.311.786-.394v2.795a2.252 2.252 0 01-.786-.393c-.394-.313-.546-.681-.546-1.004 0-.323.152-.691.546-1.004zM12.75 15.662v-2.824c.347.085.664.228.921.421.427.32.579.686.579.991 0 .305-.152.671-.579.991a2.534 2.534 0 01-.921.42z" />
