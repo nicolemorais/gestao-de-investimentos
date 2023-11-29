@@ -4,19 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Ativo extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'nomeAtivo',
+        'nome_ativo',
         'codigo',
-        'descricaoAtivo',
-        'valorAtivo',
-        
+        'descricao',
+        'valor',
+
     ];
-    
+
     /**
      * Get the user that owns the Ativo
      *

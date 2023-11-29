@@ -1,10 +1,10 @@
-<nav x-data="{ open: false }" class="bg-gray-50 border-b border-gray-100">
+<nav x-data="{ open: false }" class="bg-transparent border-b border-gray-100">
     <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-screen-lg mx-auto px-4 sm:px-6 lg:px-8  bg-gray-50 rounded-md shadow-md">
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
-                <div class="shrink-0 flex items-center ">
+                <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
                         <x-application-logo class="block h-16 w-auto fill-current text-gray-800" />
                     </a>
@@ -16,17 +16,8 @@
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
                             <path fill-rule="evenodd" d="M2.25 13.5a8.25 8.25 0 018.25-8.25.75.75 0 01.75.75v6.75H18a.75.75 0 01.75.75 8.25 8.25 0 01-16.5 0z" clip-rule="evenodd" />
                             <path fill-rule="evenodd" d="M12.75 3a.75.75 0 01.75-.75 8.25 8.25 0 018.25 8.25.75.75 0 01-.75.75h-7.5a.75.75 0 01-.75-.75V3z" clip-rule="evenodd" />
-                          </svg>                          
-                        {{ __('Ativos em posse') }}                        
-                    </x-nav-link>
-                </div>
-
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('ativos')" :active="request()->routeIs('ativos')">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
-                            <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 9a.75.75 0 00-1.5 0v2.25H9a.75.75 0 000 1.5h2.25V15a.75.75 0 001.5 0v-2.25H15a.75.75 0 000-1.5h-2.25V9z" clip-rule="evenodd" />
-                        </svg>                          
-                        {{ __('Criar um ativo') }}
+                          </svg>
+                        {{ __('Ativos em posse') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -79,11 +70,11 @@
 
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-       
+
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="px-4">
-                
+
                     <!-- Settings Dropdown -->
                     <div class="">
                         <x-dropdown  align="left" width="48">
@@ -99,7 +90,7 @@
                                 </button>
                             </x-slot>
 
-                           
+
                             <x-slot name="content">
                                 <x-dropdown-link :href="route('profile.edit')">
                                     {{ __('Profile') }}
@@ -115,7 +106,7 @@
                                         {{ __('Log Out') }}
                                     </x-dropdown-link>
                                 </form>
-                            </x-slot>    
+                            </x-slot>
                         </x-dropdown>
                     </div>
 
@@ -125,19 +116,11 @@
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
                             <path fill-rule="evenodd" d="M2.25 13.5a8.25 8.25 0 018.25-8.25.75.75 0 01.75.75v6.75H18a.75.75 0 01.75.75 8.25 8.25 0 01-16.5 0z" clip-rule="evenodd" />
                             <path fill-rule="evenodd" d="M12.75 3a.75.75 0 01.75-.75 8.25 8.25 0 018.25 8.25.75.75 0 01-.75.75h-7.5a.75.75 0 01-.75-.75V3z" clip-rule="evenodd" />
-                        </svg>       
+                        </svg>
                         {{ __('Ativos em posse') }}
                     </x-responsive-nav-link>
                 </div>
-        
-                <div class="pt-2 pb-3 space-y-1">
-                    <x-responsive-nav-link :href="route('ativos')" :active="request()->routeIs('ativos')">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
-                            <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 9a.75.75 0 00-1.5 0v2.25H9a.75.75 0 000 1.5h2.25V15a.75.75 0 001.5 0v-2.25H15a.75.75 0 000-1.5h-2.25V9z" clip-rule="evenodd" />
-                        </svg>  
-                        {{ __('Criar um ativo') }}
-                    </x-responsive-nav-link>
-                </div>
+
             </div>
         </div>
     </div>

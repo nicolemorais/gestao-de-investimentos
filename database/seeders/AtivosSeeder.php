@@ -16,7 +16,7 @@ class AtivosSeeder extends Seeder
      */
     public function run(): void
     {
-       Ativo::factory(5)->create();
+       Ativo::factory(10)->create();
 
     }
 }

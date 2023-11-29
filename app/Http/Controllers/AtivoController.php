@@ -13,68 +13,92 @@ use Illuminate\Support\Facades\DB;
 
 class AtivoController extends Controller
 {
-    protected $ativo;
-    protected $user;
-
-    public function __construct(Ativo $ativo, User $user)
-    {
-        $this->ativo = $ativo;
-        $this->user = $user;
-    }
 
     /**
      * Show the form for creating a new resource.
      */
+
     public function create(): View
     {
-        return view ('ativos');
+        return view('ativo.create');
     }
+
 
     /**
      * Store a newly created resource in storage.
      */
+
     public function store(Request $request)
     {
-
-        /// Cria um novo ativo
-        $ativo = new Ativo();
-        $ativo->fill([
-            'nomeAtivo' => $request->input('nomeAtivo'),
-            'codigo' => $request->input('codigo'),
-            'descricaoAtivo' => $request->input('descricaoAtivo'),
-            'valorAtivo' => abs($request->input('valorAtivo')),
+        $request->validate([
+            'nome_ativo' => 'required|string|max:15',
+            'codigo' => 'required|string|max:10|unique:ativos',
+            'descricao' => 'nullable|string|max:120',
+            'valor' => 'required|numeric',
+            'id_carteira' => 'required|integer',
         ]);
 
-        // Define o usuário autenticado como o proprietário do ativo
-        $ativo->id_user = auth()->id();
+        $carteira = Carteira::findOrFail($request->input('id_carteira'));
 
-        // Salva o ativo
+        $ativo = new Ativo();
+        $ativo->nome_ativo = $request->input('nome_ativo');
+        $ativo->codigo = $request->input('codigo');
+        $ativo->descricao = $request->input('descricao');
+        $ativo->valor = $request->input('valor');
+        $ativo->id_carteira = $carteira->id;
+
         $ativo->save();
-
 
         return redirect('dashboard')->with('success', 'Ativo criado com sucesso!');
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Display the specific resource.
      */
-    public function edit($id)
-    {
-      $ativo = Ativo::findOrFail($id);
 
-      return view('ativo.edit', compact('ativo'));
+    public function show($id)
+    {
+        $carteiras = Carteira::findOrFail($id)->where('id_user', auth()->user()->id)->get();
+
+        foreach ($carteiras as $carteira) {
+            $ativos = $carteira->ativos;
+        }
+
+        return view('ativos', compact('carteiras', 'ativos'));
+    }
+
+    /**
+     * Show the form for editing the specific resource.
+     */
+
+    public function edit(string $id)
+    {
+
+        $ativo = Ativo::findOrFail($id);
+
+        return view('ativo.edit', compact($id));
     }
 
     /**
      * Update the specified resource in storage.
      */
+
     public function update(Request $request, string $id)
     {
-       $ativo = Ativo::findOrFail($id);
+        $ativo = Ativo::findOrFail($id);
 
-       $ativo->update($request->all());
+        $request->validate([
+            'nome_ativo' => 'required|string|max:15',
+            'codigo' => 'required|string|max:10|unique:ativos,codigo,' . $id,
+            'descricao' => 'nullable|string|max:120',
+            'valor' => 'required|numeric',
+        ]);
 
-       return redirect()->route('dashboard')->with('success', 'Ativo atualizado com sucesso!');
+        $ativo->id_carteira = $request->input('id_carteira');
+
+        $ativo->update($request->all());
+
+        return back()->with('success', 'Ativo editado com sucesso!');
     }
 
     /**
@@ -86,6 +110,6 @@ class AtivoController extends Controller
 
         $ativo->delete();
 
-        return redirect()->route('dashboard')->with('success', 'Ativo apagado com sucesso!');
+        return back()->with('success', 'Ativo apagado com sucesso!');
     }
 }

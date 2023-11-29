@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('carteiras', function (Blueprint $table) {
             $table->id();
-            $table->string('nomeCarteira');
+            $table->string('nome_carteira');
+            $table->enum('tipo_carteira', ['renda_variavel', 'renda_fixa'])->default('renda_variavel');
 
             // Cria o relacionamento entre as tabela users
             $table->unsignedBigInteger('id_user');

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Carteira;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use App\Models\User;
@@ -21,11 +22,11 @@ class AtivoFactory extends Factory
         $nome = $this->faker->unique()->sentence();
 
         return [
-            'nomeAtivo' => $nome,
+            'nome_ativo' => $nome,
             'codigo' => $this->faker->word(3) . $this->faker->randomNumber(2),
-            'descricaoAtivo' => $this->faker->text,
-            'valorAtivo' => $this->faker->numberBetween(0, 999.99),
-            'id_user' => User::pluck('id')->random(),
+            'descricao' => $this->faker->text,
+            'valor' => $this->faker->numberBetween(0, 999.99),
+            'id_carteira' => Carteira::pluck('id')->random(),
         ];
     }
 }

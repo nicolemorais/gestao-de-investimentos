@@ -20,36 +20,7 @@ class CarteiraController extends Controller
      */
     public function create(): View
     {
-        return view ('carteiras');
+        return view('carteiras');
     }
 
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        $request->validate([
-            'nomeCarteira' => ['required', 'string', 'max:20']
-        ]);
-
-        $carteira = new Carteira();
-        $carteira->nomeCarteira = $request->get('nomeCarteira');
-        $carteira->id_user = Auth::id();
-        $carteira->save();
-
-       return redirect('dashboard')->with('success', 'Carteira criada com sucesso!');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy($id)
-    {
-        $carteira = Carteira::findOrFail($id);
-
-        $carteira->delete();
-
-        return redirect()->route('dashboard')->with('success', 'Carteira removida com sucesso!');
-    }
 }

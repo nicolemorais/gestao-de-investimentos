@@ -14,20 +14,24 @@
             class="max-w-6xl mx-auto p-4 mt-2 text-base bg-green-200 sm:px-6 lg:px-8 rounded-md"> {{ $mensagem }}</p>
     @endif
 
+    @if ($mensagem = Session::get('error'))
+        <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)"
+            class="max-w-6xl mx-auto p-4 mt-2 text-base bg-red-200 sm:px-6 lg:px-8 rounded-md"> {{ $mensagem }}</p>
+    @endif
+
+
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div
-                class="grid gap-x-40 max-sm:gap-y-10 max-lg:gap-y-10 items-start justify-center grid-cols-1 shadow-xl lg:grid-cols-2 rounded-xl  bg-gray-50 p-6 text-gray-900">
-                <div class="flex justify-between flex-col py-4 px-4 w-full rounded-md bg-slate-200">
-                    <div class="mb-2 mt-4 flex justify-between items-center">
-                        {{-- Quantidade de carteiras / Botão --}}
+                class="grid gap-x-28 max-sm:gap-y-10 max-lg:gap-y-8 items-start justify-center grid-cols-1 shadow-xl lg:grid-cols-2 rounded-xl  bg-gray-50 p-6 text-gray-900">
+                <div class="flex flex-col p-6 w-full h-full rounded-md">
+                    <div class="mb-8 mt-8 flex justify-between items-center">
                         <div class="flex justify-right gap-2">
                             <h2 class="font-semibold text-xl text-gray-800 leading-tight">Carteiras</h2>
 
                             <span
                                 class="font-semibold text-md text-gray-800 leading-tight inline-flex items-center gap-x-1 px-2 border bg-white-950 border-slate-500 rounded-full  shadow-sm  disabled:opacity-25 transition ease-in-out duration-150">
-                                {{ $carteiras->count() }}
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
                                     class="w-4 h-4">
                                     <path
@@ -36,9 +40,9 @@
                             </span>
                         </div>
 
-                        <x-link-button x-data="" x-on:click.prevent="$dispatch('open-modal', 'carteiras')"
-                            class="gap-1">
-                            {{ __('Adicionar') }}
+                        <x-link-button x-data="" x-on:click.prevent="$dispatch('open-modal', 'ativos')"
+                            class="gap-1 font-medium">
+                            {{ __('Adicionar ativo') }}
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
                                 class="w-5 h-5">
                                 <path
@@ -47,29 +51,26 @@
                         </x-link-button>
 
 
-                        <x-modal name="carteiras" focusable>
-
-                            @include('carteiras')
-
+                        <x-modal name="ativos" focusable>
+                            @include('ativo.partials.create-ativo')
                         </x-modal>
+
                     </div>
 
-                    @include('components.carteiras-list')
+                    <div class="mt-8">
+                        @include('carteiras')
+                    </div>
 
                 </div>
 
-                <div class="flex justify-center flex-col py-4 px-4 w-full">
+                    <div class="flex flex-col justify-center p-6 w-full rounded-md">
+                        <h2 class="mt-8 font-semibold text-xl text-gray-800 leading-tight">Total de ativos</h2>
 
-                    @if (count($carteiras) > 0)
-                        <div class="mb-4 mt-4 items-end">
-                            <h2 class=" font-semibold text-xl text-gray-800 leading-tight">Total de ativos</h2>
+                        {{-- Gráfico --}}
+                        <div>
+                            @include('components.chart')
                         </div>
-                    @endif
-
-                    {{-- Gráfico --}}
-                        @include('components.chart')
-
-                </div>
+                    </div>
             </div>
         </div>
     </div>

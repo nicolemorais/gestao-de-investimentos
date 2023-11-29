@@ -29,29 +29,16 @@ Route::middleware('auth')->group(function () {
     //Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    //Dashboard
-    Route::get('/teste', function () {
-        return view('teste');
-    });
-
     //Carteiras
     Route::get('/carteiras', [CarteiraController::class,'create'])->name('carteiras');
-    Route::post('/carteiras', [CarteiraController::class, 'store'])->name('carteiras');
-    Route::controller(CarteiraController::class)->prefix('carteiras')->group(function() {
-        Route::delete('destroy/{id}','destroy')->name('carteira.destroy');
-    });
 
     //Ativos
-    Route::get('/ativos', [AtivoController::class,'create'])->name('ativos');
-    Route::post('/ativos', [AtivoController::class, 'store'])->name('ativos');
     Route::controller(AtivoController::class)->prefix('ativos')->group(function() {
-        Route::get('edit/{id}','edit')->name('ativo.edit');
-        Route::put('edit/{id}','update')->name('ativo.update');
+        Route::get('/ativos','create')->name('ativo.create');
+        Route::post('/ativos','store' )->name('ativo.create');
+        Route::put('update/{id}','update')->name('ativo.update');
         Route::delete('destroy/{id}','destroy')->name('ativo.destroy');
     });
-
-
-
 
 });
 

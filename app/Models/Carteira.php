@@ -9,8 +9,12 @@ class Carteira extends Model
 {
     use HasFactory;
 
+    protected $table = 'carteiras';
+
     protected $fillable = [
-        'nomeCarteira'    
+        'nome_carteira',
+        'tipo_carteira',
+        'id_user',
     ];
 
       /**
@@ -18,7 +22,7 @@ class Carteira extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -26,7 +30,7 @@ class Carteira extends Model
 
     public function ativos()
     {
-        return $this->hasMany(Ativo::class);
+        return $this->hasMany(Ativo::class, 'id_carteira');
     }
 
 }

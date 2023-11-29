@@ -11,12 +11,13 @@ const grafico = document.getElementById('Grafico');
 new Chart(grafico, {
     type: 'doughnut',
     data: {
+    labels: [{!! $catLabel !!}],
     datasets: [{
-        label:[{!! $catLabel !!}],
+        label:['Total de ativos'],
         data: [{!! $catTotal !!}],
         backgroundColor: [
             'rgba(28, 99, 132)',
-            'rgba(5, 162, 235)',                         
+            'rgba(5, 162, 235)',
             'rgba(75, 149, 26)']}],
     },
     options: {
@@ -24,4 +25,4 @@ new Chart(grafico, {
     },
 });
 </script>
-  
+

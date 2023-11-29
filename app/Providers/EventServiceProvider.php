@@ -25,7 +25,7 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        event::listen('Illuminate\Auth\Events\Registered', 'App\Listeners\CarteiraListener@handle');
     }
 
     /**
